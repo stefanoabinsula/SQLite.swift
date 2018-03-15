@@ -256,7 +256,10 @@ public struct Cursor {
     }
 
     public subscript(idx: Int) -> String {
-        return String(cString: UnsafePointer(sqlite3_column_text(handle, Int32(idx))))
+        guard let value = UnsafePointer(sqlite3_column_text(handle, Int32(idx))) else {
+            return ""
+        }
+        return String(cString: value)
     }
 
     public subscript(idx: Int) -> Blob {
