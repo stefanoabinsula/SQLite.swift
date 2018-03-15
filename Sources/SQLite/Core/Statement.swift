@@ -256,6 +256,7 @@ public struct Cursor {
     }
 
     public subscript(idx: Int) -> String {
+        //Add check for NULL values SC
         guard let value = UnsafePointer(sqlite3_column_text(handle, Int32(idx))) else {
             return ""
         }
